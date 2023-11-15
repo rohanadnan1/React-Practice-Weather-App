@@ -6,7 +6,8 @@ import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 
 export const Context = createContext({
     city: '',
-    setCity: (city: string) => {}
+    setCity: (city: string) => {},
+    setIsData: (isData: boolean) => {}
 })
 
 const queryClient = new QueryClient()
@@ -24,16 +25,19 @@ export const fetchData = async (city: string) => {
 
 function App() {
 
+ 
+
   const [city, setCity] = useState('' as string)
+  const [isData, setIsData] = useState<boolean>(false)
   
   return (
     <>
         <QueryClientProvider client={queryClient}>
-          <Context.Provider value={{city, setCity}}>
+          <Context.Provider value={{city, setCity, setIsData}}>
               <div className='main'>
                 <h1>My Weather app using React and Typescript</h1>
                 <SearchArea />
-                <Card />
+                {isData && <Card />}
               </div>
            </Context.Provider>
         </QueryClientProvider>

@@ -6,7 +6,8 @@ import { useQuery } from '@tanstack/react-query'
 
 export const SearchArea = () => {
 
-    const { setCity, city } = useContext(Context)
+   
+    const { setCity, city, setIsData } = useContext(Context)
     const { refetch } = useQuery({queryKey: ['data', city], queryFn: () => fetchData(city)});
     const [input, setInput] = useState('' as string)
     
@@ -16,6 +17,7 @@ export const SearchArea = () => {
 
     const handleData = () => {
         setCity(input)
+        setIsData(true)
     }
 
     return(
